@@ -24,11 +24,12 @@ body {
 }
 header, section, aside, footer { padding: 1em; }
 h1, h2, h3, p, article, blockquote { padding-bottom: .5em; }
-ul { margin-left: 1em; }
 h1 { font-size: 150%; }
 h2 { font-size: 120%; }
 h3 { font-size: 110%; }
 a:focus, a:hover { font-style: italic; }
+ul { list-style-type: none; }
+li { padding-bottom: .75em; }
 
 /* the styles for the header */
 header {
@@ -39,7 +40,6 @@ header {
 		var(--light) 50%, 
 		var(--light-accent) 75%, 
 		var(--accent-color) 100%);
-	text-align: center;
 	& h2 {
 		font-size: 175%;
 		color: var(--primary-color);
@@ -60,18 +60,31 @@ header {
 main {
 	clear: left;
 	display: flex;
-	flex-direction: column;
 }
 
 /* the styles for the section */
 section {
+	flex-basis: 75%;
 	& h1 {
+		padding-top: .5em;
+	}
+	& h2 {
 		color: var(--primary-color);
+	}
+	& article + h2 {
+		clear: left;
+		border-top: 3px solid var(--primary-color);
+		padding-top: .5em;
+	}
+	& blockquote {
+		font-style: italic;
+		margin-left: 2em;
 	}
 }
 
 /* the styles for the article */
 article {
+	border-top: 3px solid var(--primary-color);
 	padding-top: .5em;
 	margin-bottom: .5em;
 	& img {
@@ -84,15 +97,12 @@ article {
 
 /* the styles for the aside */
 aside {
+	flex-basis: 25%;
 	& h2 {
 		color: var(--primary-color);
 	}
 	& img {
 		margin-bottom: .9em;
-	}
-	& blockquote {
-		font-style: italic;
-		margin-left: .5em;
 	}
 }
 
@@ -104,95 +114,4 @@ footer {
 		color: white;
 		padding-bottom: 0; 
 	}
-}
-
-/* the styles for the navigation menu */
-.navbar {
-	position: relative;
-	background-color: var(--primary-color);
-	& ul {
-		list-style-type: none;
-		margin: 0;
-	}
-	& a {
-		display: block;
-		padding: .75em;
-		text-decoration: none;
-		color: var(--light);
-	}
-	& a.current {
-		color: var(--accent-color);
-		font-weight: bold;
-	}
-	& a.current:hover { 
-		font-style: normal; /* override hover effect */
-	}
-}
-
-.menu {
-	position: absolute;
-	left: 0;
-	display: none;
-	background-color: var(--primary-color);
-}
-
-#checkbox-toggle {
-	display: none;
-}
-
-.menu-btn {
-	display: block;
-	padding: 0.25em 1em;
-	color: var(--light);
-	font-size: 24px;
-}
-.menu-btn::after {
-	content: "\2630";        /* hamburger symbol */
-}
-
-#checkbox-toggle:checked ~ .menu {
-	display: block;
-}
-#checkbox-toggle:checked ~ .menu-btn::after {
-	content: "\2716";             /* close symbol */
-}
-
-/* the media query for the menu */
-@media only screen and (min-width: 580px) {
-	.menu {
-		position: relative;
-		display: flex;
-		justify-content: space-evenly;
-	}
-	.menu-btn {
-		display: none;
-	}
-	.menu li:has(.submenu) small::after {
-		content: "\25bc";  /* down triangle */
-	}
-	/* make sure menu displays horizontally if menu checkbox is checked */
-	#checkbox-toggle:checked ~ .menu { display: flex; }
-}
-
-/* the media query for the page */
-@media only screen and (min-width: 620px) {
-	header {
-		text-align: left;
-	}
-	main {
-		flex-direction: row;
-	}
-	section {
-		order: 2;
-		flex-basis: 75%;
-	}
-	aside {
-		order: 1;
-		flex-basis: 25%;
-	}
-}
-
-/* the styles for the Contact Us section */
-.contact {
-	padding: 2em 5em;	
 }
